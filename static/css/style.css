@@ -1,0 +1,24 @@
+nav {
+    background-color: #ffffff;
+   
+}
+
+nav ul a {
+     color: #a5d6a7;
+}
+
+.button-collapse {
+    color: #a5d6a7;
+}
+
+.masthead {
+    height: 100vh;
+    min-height: 300px;
+    background: url(../images/masthead-placeholder.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    text-shadow: 2px 2px #383737;
+}
