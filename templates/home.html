@@ -8,7 +8,7 @@
                     <img src="{{category.category_image}}">
                 </div>
                 <div class="card-action">
-                    <a href="{{url_for('get_tea_types', category_id=category._id)}}">{{category.category_name}}</a>
+                    <a href="{{url_for('get_tea', category_name=category._name)}}">{{category.category_name}}</a>
                 </div>
             </div>
         </div>

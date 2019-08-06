@@ -16,10 +16,10 @@ mongo = PyMongo(app)
 def get_category():
     return render_template("home.html", category=mongo.db.category.find())
    
-@app.route('/get_tea_types/<category_id>', methods=['GET', 'POST'])
-def get_tea_types(category_id):
-    tea= mongo.db.teatype.find_one({'_id': ObjectId(category_id)})
-    return render_template('tea_types.html', teatype=tea) 
+@app.route('/get_tea/<category_name>', methods=['GET', 'POST'])
+def get_tea(category_name):
+    get_tea = mongo.db.teatype.find({'category_name': category_name})
+    return render_template('tea_types.html', tea=get_tea)
    
    
 if __name__ == '__main__':
