@@ -19,7 +19,12 @@ def get_category():
 @app.route('/get_tea/<category_name>', methods=['GET', 'POST'])
 def get_tea(category_name):
     get_tea = mongo.db.teatype.find({'category_name': category_name})
-    return render_template('tea_types.html', tea=get_tea)
+    return render_template('tea_types.html', teatype=get_tea)
+
+@app.route('/get_tea_specific/<tea_name>', methods=['GET', 'POST'])
+def get_tea_specific(tea_name):
+    tea_specific = mongo.db.teatype.find({'tea_name': tea_name})
+    return render_template('tea_specific.html', teatype=tea_specific)
    
    
 if __name__ == '__main__':

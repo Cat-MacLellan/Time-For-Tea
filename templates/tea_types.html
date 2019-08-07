@@ -1,5 +1,21 @@
-{% extends 'base.html' %} {% block content %}
-       {% for tea in teatype %}
-           {{ tea.tea_name }}
-       {% endfor %}
+{% extends 'base.html' %} {% block content %} 
+<div class="container">
+       
+       <div class="row">
+              {% for teatype in teatype %}
+              <div class="col s12 m6">
+                     <div class="card">
+                            <div class="card-image">
+                                   <img src="images/sample-1.jpg">
+                                   <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                            </div>
+                            <div class="card-action">
+                                    <a href="{{url_for('get_tea_specific', tea_name=teatype.tea_name)}}">{{ teatype.tea_name}}</a>
+                                   <p></p>
+                            </div>
+                     </div>
+              </div>
+              {% endfor %}
+       </div>
+</div>
 {% endblock %}
