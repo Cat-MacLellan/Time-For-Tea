@@ -22,3 +22,7 @@ nav ul a {
     color: #ffffff;
     text-shadow: 2px 2px #383737;
 }
+
+.card {
+    width: 250px;
+}
