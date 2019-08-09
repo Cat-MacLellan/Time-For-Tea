@@ -20,12 +20,25 @@
                 <li><a href="">Home</a></li>
                 <li><a href="">Tea</a></li>
                 <li><a href="">Why Drink Tea?</a></li>
+                {% if session.username %}
+                <li><a href="#">My Lists</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Log In</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="">Home</a></li>
                 <li><a href="">Tea</a></li>
                 <li><a href="">Why Drink Tea?</a></li>
-
+                {% if session.username %}
+                <li><a href="#">My Lists</a></li>
+                <li><a href="#">Log Out</a></li>
+                {% else %}
+                <li><a href="#">Log In</a></li>
+                <li><a href="#">Register</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
