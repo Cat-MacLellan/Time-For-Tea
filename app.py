@@ -58,7 +58,6 @@ def logout():
     session.clear()
     return redirect(url_for('get_category'))    
 
-   
 @app.route('/get_tea/<category_name>', methods=['GET', 'POST'])
 def get_tea(category_name):
     get_tea = mongo.db.teatype.find({'category_name': category_name})
@@ -69,7 +68,20 @@ def get_tea_specific(tea_name):
     tea_specific = mongo.db.teatype.find({'tea_name': tea_name})
     return render_template('tea_specific.html', teatypes=tea_specific)
    
-   
+@app.route('/show_lists')
+def show_lists():
+    return render_template('lists.html', lists=mongo.db.lists.find())
+
+@app.route('/add_list')
+def add_list():
+    return render_template('add_list.html')
+    
+@app.route('/insert_list', methods=['POST'])
+def insert_list():
+    lists =  mongo.db.lists
+    lists.insert_one(request.form.to_dict())
+    return redirect(url_for("show_lists"))
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

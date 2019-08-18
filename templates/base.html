@@ -21,7 +21,7 @@
                 <li><a href="">Tea</a></li>
                 <li><a href="">Why Drink Tea?</a></li>
                 {% if session.username %}
-                <li><a href="#">My Lists</a></li>
+                <li><a href="{{ url_for('show_lists') }}">My Lists</a></li>
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
                 <li><a href="{{ url_for('login') }}">Log In</a></li>
