@@ -1,26 +1,28 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
-       {% for category in category %}
-       <h3>{{ category.category_name }}</h3>
-       <p>{{ category.category_description}}</p>
-       {% endfor %}
-       <div class="row">
-              {% for teatype in teatypes %}
+              {% for category in category %}
+              <h3>{{ category.category_name }}</h3>
+              <p>{{ category.category_description}}</p>
+              {% endfor %}
+              <div class="row">
+                     {% for teatype in teatypes %}
+                     <div class="col s12 m6 l4">
+                            <div class="card">
+                                   <div class="card-image">
+                                          <img src="{{teatype.tea_image}}" style="height:250px; width:250px;">
+                                          <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="{{url_for('add_tea', tea_name=teatype.tea_name)}}"><i class="material-icons">add</i></a>
 
-
-              <div class="col s12 m6 l4">
-                     <div class="card">
-                            <div class="card-image">
-                                   <img src="{{teatype.tea_image}}" style="height:250px; width:250px;">
-                                   <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                            </div>
-                            <div class="card-action">
-                                   <a href="{{url_for('get_tea_specific', tea_name=teatype.tea_name)}}">{{teatype.tea_name}}</a>
-                                   <p></p>
+                                   </div>
+                                   <div class="card-action">
+                                          <a href="{{url_for('get_tea_specific', tea_name=teatype.tea_name)}}">{{teatype.tea_name}}</a>
+                                   </div>
                             </div>
                      </div>
+                     {% endfor %}
+                  
+
               </div>
-              {% endfor %}
-       </div>
+       
 </div>
+
 {% endblock %}

@@ -61,7 +61,8 @@ def logout():
 @app.route('/get_tea/<category_name>', methods=['GET', 'POST'])
 def get_tea(category_name):
     get_tea = mongo.db.teatype.find({'category_name': category_name})
-    return render_template('tea_types.html', teatypes=get_tea, category=mongo.db.category.find({'category_name': category_name}))
+    lists=mongo.db.lists.find()
+    return render_template('tea_types.html', teatypes=get_tea, lists=lists, category=mongo.db.category.find({'category_name': category_name}))
 
 
 @app.route('/get_tea_specific/<tea_name>', methods=['GET', 'POST'])
@@ -83,21 +84,14 @@ def insert_list():
     lists.insert_one(request.form.to_dict())
     return redirect(url_for("show_lists"))
     
-@app.route('/add_tea/<tea_name>', methods=['GET', 'POST'])
-def add_tea(tea_name):
-    tea = mongo.db.teatype.find({'tea_name': tea_name})
-    return render_template('add_tea.html', teatypes=tea, lists=mongo.db.lists.find())
-    
-@app.route('/update_list/<list_id>', methods=["POST"])
-def update_list(list_id):
-    lists = mongo.db.lists
-    lists.update({'list_id': ObjectId('list_id')},
-    {
-       {'tea_name':request.form.get('tea_name')}
-    })
-    return redirect(url_for('show_lists'))
-    
+@app.route('/add_to_list')
+def add_to_list():
+    return render_template('tea_types', list=mongo.db.lists.find())
 
+@app.route('/insert_into_list')
+def insert_into_list():
+    
+    redirect('lists.html')
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
