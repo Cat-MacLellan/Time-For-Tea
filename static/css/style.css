@@ -30,3 +30,7 @@ nav ul a {
 form {
     padding-top: 50px;
 }
+
+.list-btn {
+    float: right;
+}

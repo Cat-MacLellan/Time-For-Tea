@@ -4,6 +4,8 @@
     <ul class="collapsible">
         <li>
             <div class="collapsible-header">{{list.list_name}}: {{list.list_description}}</div>
+            <a href="{{url_for('delete_list', list_id=list._id)}}" class="waves-effect waves-light btn btn_small">Delete</a>
+            <a href="{{url_for('edit_list', list_id=list._id)}}" class="waves-effect waves-light btn btn_small blue">Edit</a>
             <div class="collapsible-body">{{list.tea_name}}</div>
         </li>
     </ul>

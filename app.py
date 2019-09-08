@@ -83,10 +83,35 @@ def insert_list():
     lists.insert_one(request.form.to_dict())
     return redirect(url_for("show_lists"))
     
-#@edit_list
-#@delete list
-#@delete tea from list
-#@addnew tea to list (in edit? )
+@app.route('/edit_list/<list_id>')
+def edit_list(list_id):
+    the_list =  mongo.db.lists.find_one({"_id": ObjectId(list_id)})
+    return render_template('edit_list.html', list=the_list, teatypes = mongo.db.teatype.find())
+
+
+@app.route('/update_list/<list_id>', methods=["POST"])
+def update_list(list_id):
+    list = mongo.db.lists
+    list.update( {'_id': ObjectId(list_id)},
+    {
+        'list_name':request.form.get('list_name'),
+        'list_description':request.form.get('list_description'),
+        'tea_name': request.form.get('tea_name')
+    })
+    return redirect(url_for('show_lists'))
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 
 
 if __name__ == '__main__':
