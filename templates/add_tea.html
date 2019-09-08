@@ -1,10 +1,17 @@
-{% extends 'base.html' %} {% block content %}
-<form action="{{ url_for('update_list', list_id=lists._id) }}" method="POST">
+{% extends 'base.html' %} {% block content %} 
+
+
+<form action="{{url_for('add_tea_to_list')}}" method="POST">
     {% for teatype in teatypes %}
-    <p id="tea_name" name="tea_name">Add {{ teatype.tea_name}} to a list: </p>
-    {% endfor %} {% for list in lists %}
-    <p>{{list.list_name}}</p>
-    <button class="btn waves-effect waves-light" type="submit" name="action">Add</button> {% endfor %}
+    <input value="{{ teatype.tea_name}}" name="tea_name"/>
+    {% endfor %}
+    <select name="list_name" id="list_name">
+                    <option value="" disabled selected>Choose your option</option>
+                    {% for list in lists %}
+                    <option value="{{list.list_name}}">{{ list.list_name }}</option>
+                    {% endfor %}
+                    </select>
+    <button class="btn waves-effect waves-light" type="submit">Add</button> 
 </form>
 
 {% endblock %}

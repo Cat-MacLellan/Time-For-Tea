@@ -71,11 +71,11 @@ def get_tea_specific(tea_name):
    
 @app.route('/show_lists')
 def show_lists():
-    return render_template('lists.html', lists=mongo.db.lists.find())
+    return render_template('lists.html', lists=mongo.db.lists.find(), teatype = mongo.db.teatype.find())
 
 @app.route('/add_list')
 def add_list():
-    return render_template('add_list.html')
+    return render_template('add_list.html', teatypes = mongo.db.teatype.find())
     
 @app.route('/insert_list', methods=['POST'])
 def insert_list():
@@ -83,23 +83,14 @@ def insert_list():
     lists.insert_one(request.form.to_dict())
     return redirect(url_for("show_lists"))
     
-@app.route('/add_tea/<tea_name>', methods=['GET', 'POST'])
-def add_tea(tea_name):
-    tea = mongo.db.teatype.find({'tea_name': tea_name})
-    return render_template('add_tea.html', teatypes=tea, lists=mongo.db.lists.find())
-    
-@app.route('/update_list/<list_id>', methods=["POST"])
-def update_list(list_id):
-    lists = mongo.db.lists
-    lists.update({'list_id': ObjectId('list_id')},
-    {
-       {'tea_name':request.form.get('tea_name')}
-    })
-    return redirect(url_for('show_lists'))
-    
+#@edit_list
+#@delete list
+#@delete tea from list
+#@addnew tea to list (in edit? )
 
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+ 
