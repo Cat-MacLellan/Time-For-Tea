@@ -100,19 +100,11 @@ def update_list(list_id):
     })
     return redirect(url_for('show_lists'))
     
-
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
+@app.route('/delete_list/<list_id>')
+def delete_list(list_id):
+    mongo.db.lists.remove({'_id': ObjectId(list_id)})
+    return redirect(url_for('show_lists'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
