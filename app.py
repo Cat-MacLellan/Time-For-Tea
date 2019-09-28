@@ -68,7 +68,15 @@ def get_tea(category_name):
 def get_tea_specific(tea_name):
     tea_specific = mongo.db.teatype.find({'tea_name': tea_name})
     return render_template('tea_specific.html', teatypes=tea_specific)
+    
+@app.route('/show_recipes')
+def show_recipes():
+    return render_template('show_recipes.html', recipes=mongo.db.recipes.find())
 
+@app.route('/get_recipe_specific/<recipe_name>', methods=['GET', 'POST'])
+def get_recipe_specific(recipe_name):
+    recipes = mongo.db.recipes.find({'recipe_name': recipe_name})
+    return render_template('recipes_specific.html', recipe=recipes)
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
