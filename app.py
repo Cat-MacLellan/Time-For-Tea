@@ -68,44 +68,8 @@ def get_tea(category_name):
 def get_tea_specific(tea_name):
     tea_specific = mongo.db.teatype.find({'tea_name': tea_name})
     return render_template('tea_specific.html', teatypes=tea_specific)
-   
-@app.route('/show_lists')
-def show_lists():
-    return render_template('lists.html', lists=mongo.db.lists.find(), teatype = mongo.db.teatype.find())
 
-@app.route('/add_list')
-def add_list():
-    return render_template('add_list.html', teatypes = mongo.db.teatype.find())
     
-@app.route('/insert_list', methods=['POST'])
-def insert_list():
-    lists =  mongo.db.lists
-    lists.insert_one(request.form.to_dict())
-    return redirect(url_for("show_lists"))
-    
-@app.route('/edit_list/<list_id>')
-def edit_list(list_id):
-    the_list =  mongo.db.lists.find_one({"_id": ObjectId(list_id)})
-    return render_template('edit_list.html', list=the_list, teatypes = mongo.db.teatype.find())
-
-
-@app.route('/update_list/<list_id>', methods=["POST"])
-def update_list(list_id):
-    list = mongo.db.lists
-    list.update( {'_id': ObjectId(list_id)},
-    {
-        'list_name':request.form.get('list_name'),
-        'list_description':request.form.get('list_description'),
-        'tea_name': request.form.get('tea_name')
-    })
-    return redirect(url_for('show_lists'))
-    
-    
-@app.route('/delete_list/<list_id>')
-def delete_list(list_id):
-    mongo.db.lists.remove({'_id': ObjectId(list_id)})
-    return redirect(url_for('show_lists'))
-
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
