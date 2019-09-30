@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId 
 import bcrypt
@@ -76,7 +76,45 @@ def show_recipes():
 @app.route('/get_recipe_specific/<recipe_name>', methods=['GET', 'POST'])
 def get_recipe_specific(recipe_name):
     recipes = mongo.db.recipes.find({'recipe_name': recipe_name})
-    return render_template('recipes_specific.html', recipe=recipes)
+    return render_template('recipes_specific.html', recipes=recipes)
+    
+@app.route('/add_recipe')
+def add_recipe():
+    category=mongo.db.category.find()
+    allergies=mongo.db.allergies.find()
+    benefits = mongo.db.benefits.find()
+    restrictions = mongo.db.restrictions.find()
+    return render_template('add_recipe.html', category=category, allergies=allergies, benefits=benefits, restrictions=restrictions)
+    
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipes =  mongo.db.recipes
+    insert_recipe = {
+        'category_name': request.form.get('category_name'),
+        'recipe_name': request.form.get('recipe_name'),
+        'author': request.form.get('author'),
+        'origin': request.form.get('origin'),
+        'recipe_image': request.form.get('recipe_image'),
+        'ingredients': request.form.getlist('ingredients'),
+        'instructions': request.form.getlist('instructions'),
+        'allergies': request.form.getlist('allergies'),
+        'benefits': request.form.getlist('benefits'),
+        'vegetarian': request.form.get('vegetarian'),
+        'vegan': request.form.get('vegans'),
+        'gluten_free': request.form.get('gluten_free'),
+        'time': request.form.get('time'),
+        'username': session['username']
+    }
+    recipes.insert_one(insert_recipe)
+    return redirect(url_for("show_recipes"))
+    
+    
+    
+    
+    
+    
+    
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
