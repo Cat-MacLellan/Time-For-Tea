@@ -1,10 +1,53 @@
 {% extends 'base.html' %} {% block content %}
 <container>
-    {% for recipes in recipes %}
-    <div>
-        {{recipes.recipe_name}}
-    </div>
+ {% for recipes in recipes %}
+ <div>
+  {{recipes.recipe_name}}
+ </div>
+ <div>
+  <img class="image" src="{{recipes.recipe_image}}">
+ </div>
+ <div>
+  {{recipes.category_name}}
+ </div>
+ <div>
+  {{recipes.author}}
+ </div>
+ <div>
+  {{recipes.origin}}
+ </div>
+ <div>
+  {{recipes.ingrediants}}
+ </div>
+ <div>
+  {{recipes.instructions}}
+ </div>
+ <div>
+  {% if recipes.allergies %} {{recipes.allergies|join(', ')}}
+  {% endif %}
+ </div>
+ <div>
+  {% if recipes.benefits %}
+  {{recipes.benefits|join(', ')}}
+  {% endif %}
+ </div>
+ <div>
+  {{recipes.vegetarian}}
+ </div>
+ <div>
+  {{recipes.vegan}}
+ </div>
+ <div>
+  {{recipes.gluten_free}}
+ </div>
+ <div>
+  {{recipes.time}}
+ </div>
+ <div>
+  {{recipes.username}}
+ </div>
+
+
 </container>
 
-{% endfor %}
-{% endblock %}
+{% endfor %} {% endblock %}

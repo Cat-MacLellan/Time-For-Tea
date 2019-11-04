@@ -34,3 +34,8 @@ form {
 .list-btn {
     float: right;
 }
+
+.image {
+    width: 300px;
+    height: 200px;
+}
